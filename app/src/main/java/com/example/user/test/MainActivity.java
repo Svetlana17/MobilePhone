@@ -1,7 +1,10 @@
 package com.example.user.test;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> selectedPhones = new ArrayList();
     ListView phonesList;
+    public String state = "DEFAULT";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,5 +75,24 @@ public class MainActivity extends AppCompatActivity {
         selectedPhones.clear();
 
         adapter.notifyDataSetChanged();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.main:
+                state = "main";
+                Intent intent = new Intent(MainActivity.this,StartActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return true;
+        }
     }
 }
